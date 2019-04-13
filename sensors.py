@@ -1,4 +1,4 @@
-from mpu9250 import MPU9250
+from com.mpu9250 import MPU9250
 
 
 class SensorVector():

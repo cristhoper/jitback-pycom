@@ -11,6 +11,9 @@ wifi_enable = False
 lora_enabled = False
 wifi_config = None
 
+# https://docs.pycom.io/firmwareapi/pycom/network/bluetooth/
+# https://github.com/pycom/pycom-micropython-sigfox/issues/40
+
 
 class Comdev(object):
 
@@ -39,8 +42,7 @@ class Comdev(object):
         elif e & Bluetooth.CLIENT_DISCONNECTED:
             print("disconnected")
 
-    @staticmethod
-    def char1_cb_handler(characteristic):
+    def char1_cb_handler(self, characteristic):
         events = characteristic.events()
         if events & Bluetooth.CHAR_WRITE_EVENT:
             print("Write request with value = {}".format(characteristic.value()))
@@ -50,8 +52,8 @@ class Comdev(object):
     def promote(self, device_id=0):
         if device_id == BT_PROMOTE:
             self.ble.advertise(True)
-            srv1 = self.ble.service(uuid=b'0000000000001a01', isprimary=True)
-            self.chr1 = srv1.characteristic(uuid=b'0000000000001b01', value=0)
+            srv1 = self.ble.service(uuid=b'000000000000180d', isprimary=True)
+            self.chr1 = srv1.characteristic(uuid=b'0000000000002a38', value=0)
             self.chr1.callback(trigger=Bluetooth.CHAR_WRITE_EVENT | Bluetooth.CHAR_READ_EVENT,
                                handler=self.char1_cb_handler)
         else:

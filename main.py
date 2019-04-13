@@ -2,10 +2,10 @@ import ubinascii
 from network import Bluetooth
 
 from sensors import SensorVector
-#from comdev import Comdev
+from comdev import Comdev
 
 sensorlist = SensorVector()
-
+devices = Comdev()
 for id in range(sensorlist.length()):
     try:
         print(sensorlist.get(id).sensors())
