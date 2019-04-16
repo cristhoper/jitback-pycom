@@ -7,8 +7,8 @@ Copyright (c) 2014 Sebastian Plamauer, oeplse@gmail.com, Peter Hinch
 (c) 2019 @cristhoper
 '''
 
-from .imu import MPU6050, bytes_toint, MPUException
-from .vector3d import Vector3d
+from imu import MPU6050, bytes_toint, MPUException
+from vector3d import Vector3d
 
 
 class MPU9250(MPU6050):
